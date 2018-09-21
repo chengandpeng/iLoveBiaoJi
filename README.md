@@ -6,5 +6,5 @@
 2. 下载原版微信和QQ拖至Applications文件夹下（支持任意文件夹）。  
 3. 在终端里执行**hack.sh**  
 4. 输入1生成证书,并在Keychain中信任导入的**ILOVEBIAOJI**证书 
-5. 再次执行**hack.sh** 
+5. 再次执行**hack.sh** 
 6. 输入2或者3根据引导破解微信或者QQ。    
