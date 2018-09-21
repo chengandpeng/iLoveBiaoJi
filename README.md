@@ -1,5 +1,5 @@
 ## What is this?
-修改Mac版微信和QQ，防止被公司屏蔽。
+标机Mac中运行微信和QQ
 
 ## How to use?
 1. 下载**crt.conf**和**hack.sh**到本地同一文件夹内
