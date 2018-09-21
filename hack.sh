@@ -53,16 +53,25 @@ function crack_app() {
         exit 1
     fi
 
+    echo -e "${GREEN}指定${APP_NAME}.app路径:回车使用默认路径Applications,或者将App拖入终端得到路径后回车"
+    read path
+
+    if [ -z $path ]; then
+        APP_PATH=/Applications/${APP_NAME}.app
+    else
+        APP_PATH=$path
+    fi
     # 检查应用是否存在
-    if [ ! -d /Applications/${APP_NAME}.app ]; then
-        echo -e "${RED}Applications中没有${APP_NAME}.app,请先将应用加进去${RESET}"
+    if [ ! -d $APP_PATH ]; then
+        echo -e "${RED}${APP_PATH}不存在,请先将应用加进去${RESET}"
         exit 1
     fi
 
     # 替换字符
-    mv /Applications/${APP_NAME}.app/Contents/MacOS/* /Applications/${APP_NAME}.app/Contents/MacOS/${REP_TAG}
-    sed -i -e "s/>$APP_NAME</>$REP_TAG</g" Info.plist
-    codesign -f -s $CRT_NAME $APP_NAME.app
+    mv ${APP_PATH}/Contents/MacOS/* ${APP_PATH}/Contents/MacOS/${REP_TAG}
+    sed -i -e "s/>$APP_NAME</>$REP_TAG</g" ${APP_PATH}/Contents/Info.plist
+    rm ${APP_PATH}/Contents/Info.plist-e
+    codesign -f -s $CRT_NAME ${APP_PATH}
 
     if [ $? -ne 0 ]; then
         echo -e "${RED}破解失败${RESET}"
@@ -75,7 +84,7 @@ function crack_app() {
 # Main
 ###
 echo -e "${GREEN}***标机使用微信,QQ脚本***"
-echo -e "先确保微信或者QQ已经存在于本地的Applications文件夹中${RESET}"
+echo -e "请先自行从官网下载微信和QQ${RESET}"
 echo -e "1: 生成导入自签证书，如果已经完成，不需重复执行"
 echo -e "2: 破解微信"
 echo -e "3: 破解QQ"
